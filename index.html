@@ -32,16 +32,36 @@
     .ads {
       margin-top: 40px;
     }
+    button {
+  margin-top: 30px;
+  padding: 10px 20px;
+  font-size: 1em;
+  border: none;
+  background-color: #dda0dd;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+button:hover {
+  background-color: #ba55d3;
+}
   </style>
 </head>
 <body>
   <h1>🌸 今日のことだま 🌸</h1>
+
+  <!-- メッセージ表示領域 -->
   <div id="message">メッセージを読み込み中...</div>
+
+  <!-- ⭐️ここにボタンを追加！ -->
+  <button onclick="showRandomMessage()">🔁 次のメッセージを見る</button>
 
   <!-- ↓ここに後でAdSense広告コードを追加する場所↓ -->
   <div class="ads">
     <!-- ここにAdSense広告コードを追加 -->
   </div>
 </body>
+
 </html>
 
