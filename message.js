@@ -1,19 +1,21 @@
-// messages.json を読み込む
+let messages = [];
+
+// JSONを最初に読み込んでおく
 fetch('messages.json')
   .then(response => response.json())
-  .then(messages => {
-    // 今日の「年初からの通し日数」を取得（1月1日が1）
-    const today = new Date();
-    const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 86400000);
-
-    // メッセージ配列から該当するものを取得
-    const message = messages[dayOfYear % messages.length];
-
-    // 表示する
-    document.getElementById('message').innerText = message;
+  .then(data => {
+    messages = data;
+    showRandomMessage(); // 初回表示もランダムでOK
   })
   .catch(error => {
-    console.error("メッセージの読み込みに失敗しました:", error);
+    console.error("読み込み失敗:", error);
     document.getElementById('message').innerText = "メッセージを取得できませんでした。";
   });
+
+// ボタン押下で呼ばれる関数
+function showRandomMessage() {
+  if (messages.length === 0) return;
+  const index = Math.floor(Math.random() * messages.length);
+  document.getElementById('message').innerText = messages[index];
+}
 
