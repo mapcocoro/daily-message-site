@@ -27,17 +27,16 @@ function showTheme(theme) {
   const index = Math.floor(Math.random() * options.length);
   const themeBox = document.getElementById('theme-message');
 
-  // 表示エリアを更新
+  // 下部に表示（←ここ重要！）
   themeBox.classList.remove('visible');
   themeBox.innerHTML = `<strong>${getThemeLabel(theme)}メッセージ：</strong><br>「${options[index]}」`;
 
-  // フェードイン
   setTimeout(() => {
     themeBox.classList.add('visible');
   }, 50);
 }
 
-// テーマ名の日本語ラベルを返す関数
+// テーマの日本語表示名
 function getThemeLabel(theme) {
   switch (theme) {
     case 'relax': return '🧘‍♀️ リラックス';
