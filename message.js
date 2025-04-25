@@ -12,11 +12,22 @@ fetch('messages.json')
     document.getElementById('message').innerText = "メッセージを取得できませんでした。";
   });
 
-// アファメーション表示用関数（初期とボタン切り替え用）
-function showRandomMessage() {
-  if (messages.length === 0) return;
-  const index = Math.floor(Math.random() * messages.length);
-  document.getElementById('message').innerText = messages[index];
+// アファメーション表示用関数
+function showTheme(theme) {
+  const options = themeMessages[theme];
+  if (!options) return;
+
+  const index = Math.floor(Math.random() * options.length);
+  const themeBox = document.getElementById('theme-message');
+
+  // 表示前に一度非表示に
+  themeBox.classList.remove('visible');
+  themeBox.innerText = options[index];
+
+  // 少し遅らせてフェードイン（再描画のための時間）
+  setTimeout(() => {
+    themeBox.classList.add('visible');
+  }, 50);
 }
 
 // 🎯 テーマ別メッセージ（固定で定義してOK）
