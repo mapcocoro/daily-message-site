@@ -19,7 +19,7 @@ function showTheme(theme) {
   themeBox.classList.remove('visible');
   themeBox.innerHTML = `
     <strong>${getThemeLabel(theme)} メッセージ：</strong><br>
-    「${options[index]}」
+    ${options[index]}
   `;
 
   // アニメーション表示
