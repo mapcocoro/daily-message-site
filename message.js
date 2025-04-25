@@ -13,12 +13,6 @@ fetch('messages.json')
   });
 
 // ✅ アファメーション表示用関数（←これが抜けてた！）
-function showRandomMessage() {
-  if (messages.length === 0) return;
-  const index = Math.floor(Math.random() * messages.length);
-}
-
-// ✅ テーマ別切り替え関数（表示位置を切り替えるように修正済み）
 function showTheme(theme) {
   const options = themeMessages[theme];
   if (!options) return;
