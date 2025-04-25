@@ -16,7 +16,6 @@ fetch('messages.json')
 function showRandomMessage() {
   if (messages.length === 0) return;
   const index = Math.floor(Math.random() * messages.length);
-  document.getElementById('message').innerText = messages[index];
 }
 
 // ✅ テーマ別切り替え関数（表示位置を切り替えるように修正済み）
