@@ -27,7 +27,6 @@ function showTheme(theme) {
   const index = Math.floor(Math.random() * options.length);
   const themeBox = document.getElementById('theme-message');
 
-  // 下部に表示（←ここ重要！）
   themeBox.classList.remove('visible');
   themeBox.innerHTML = `<strong>${getThemeLabel(theme)}メッセージ：</strong><br>「${options[index]}」`;
 
