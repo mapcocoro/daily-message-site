@@ -1,22 +1,14 @@
 let messages = [];
 
-// アファメーションJSONを読み込んで初期表示
-fetch('messages.json')
-  .then(response => response.json())
-  .then(data => {
-    messages = data;
-    showRandomMessage(); // 最初のアファメーション表示
-  })
-  .catch(error => {
-    console.error("読み込み失敗:", error);
-    document.getElementById('message').innerText = "メッセージを取得できませんでした。";
-  });
+function showRandomMessage() {
+  if (messages.length === 0) return;
+  const index = Math.floor(Math.random() * messages.length);
+  document.getElementById('message').innerText = messages[index];
+}
 
-// ✅ アファメーション表示用関数（←これが抜けてた！）
 function showTheme(theme) {
   const options = themeMessages[theme];
   if (!options) return;
-
   const index = Math.floor(Math.random() * options.length);
   const themeBox = document.getElementById('theme-message');
 
@@ -28,7 +20,6 @@ function showTheme(theme) {
   }, 50);
 }
 
-// テーマの日本語表示名
 function getThemeLabel(theme) {
   switch (theme) {
     case 'relax': return '🧘‍♀️ リラックス';
@@ -37,6 +28,18 @@ function getThemeLabel(theme) {
     default: return '';
   }
 }
+
+// JSON 読み込み
+fetch('messages.json')
+  .then(response => response.json())
+  .then(data => {
+    messages = data;
+    showRandomMessage(); // ✅ 初回に1件表示
+  })
+  .catch(error => {
+    console.error("読み込み失敗:", error);
+    document.getElementById('message').innerText = "メッセージを取得できませんでした。";
+  });
 
 // 🎯 テーマ別メッセージ（固定で定義してOK）
 const themeMessages = {
