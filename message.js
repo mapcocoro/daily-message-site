@@ -17,10 +17,10 @@ function showTheme(theme) {
 
   // 表示内容更新
   themeBox.classList.remove('visible');
-  themeBox.innerHTML = `
-    <strong>${getThemeLabel(theme)} メッセージ：</strong><br>
-    ${options[index]}
-  `;
+themeBox.innerHTML = `
+  <strong>${getThemeLabel(theme)} メッセージ：</strong><br>
+  ${options[index]}
+`;
 
   // アニメーション表示
   setTimeout(() => {
