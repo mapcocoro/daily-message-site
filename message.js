@@ -27,12 +27,24 @@ function showTheme(theme) {
   const index = Math.floor(Math.random() * options.length);
   const themeBox = document.getElementById('theme-message');
 
+  // 表示エリアを更新
   themeBox.classList.remove('visible');
-  themeBox.innerText = options[index];
+  themeBox.innerHTML = `<strong>${getThemeLabel(theme)}メッセージ：</strong><br>「${options[index]}」`;
 
+  // フェードイン
   setTimeout(() => {
     themeBox.classList.add('visible');
   }, 50);
+}
+
+// テーマ名の日本語ラベルを返す関数
+function getThemeLabel(theme) {
+  switch (theme) {
+    case 'relax': return '🧘‍♀️ リラックス';
+    case 'positive': return '🌈 前向き';
+    case 'healing': return '🍀 癒し';
+    default: return '';
+  }
 }
 
 // 🎯 テーマ別メッセージ（固定で定義してOK）
