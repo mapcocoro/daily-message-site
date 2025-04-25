@@ -12,7 +12,14 @@ fetch('messages.json')
     document.getElementById('message').innerText = "メッセージを取得できませんでした。";
   });
 
-// アファメーション表示用関数
+// ✅ アファメーション表示用関数（←これが抜けてた！）
+function showRandomMessage() {
+  if (messages.length === 0) return;
+  const index = Math.floor(Math.random() * messages.length);
+  document.getElementById('message').innerText = messages[index];
+}
+
+// ✅ テーマ別切り替え関数（表示位置を切り替えるように修正済み）
 function showTheme(theme) {
   const options = themeMessages[theme];
   if (!options) return;
@@ -20,11 +27,9 @@ function showTheme(theme) {
   const index = Math.floor(Math.random() * options.length);
   const themeBox = document.getElementById('theme-message');
 
-  // 表示前に一度非表示に
   themeBox.classList.remove('visible');
   themeBox.innerText = options[index];
 
-  // 少し遅らせてフェードイン（再描画のための時間）
   setTimeout(() => {
     themeBox.classList.add('visible');
   }, 50);
