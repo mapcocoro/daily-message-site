@@ -68,20 +68,21 @@
   <h1>🌸 今日のアファメーション 🌸</h1>
 
   <!-- アファメーション表示 -->
-  <div id="message">メッセージを読み込み中...</div>
+ <!-- 上部：アファメーション -->
+<div id="message" class="message-card">メッセージを読み込み中...</div>
 
-  <!-- 次のアファメーションボタン -->
-  <button onclick="showRandomMessage()">🔁 次のメッセージを見る</button>
+<!-- 次のメッセージボタン -->
+<button onclick="showRandomMessage()">🔁 次のメッセージを見る</button>
 
-  <!-- テーマボタン -->
-  <div style="margin-top: 40px;">
-    <button onclick="showTheme('relax')">🧘‍♀️ リラックス</button>
-    <button onclick="showTheme('positive')">🌈 前向き</button>
-    <button onclick="showTheme('healing')">🍀 癒し</button>
-  </div>
+<!-- テーマボタン -->
+<div style="margin-top: 40px;">
+  <button onclick="showTheme('relax')">🧘‍♀️ リラックス</button>
+  <button onclick="showTheme('positive')">🌈 前向き</button>
+  <button onclick="showTheme('healing')">🍀 癒し</button>
+</div>
 
-  <!-- テーマ別メッセージ表示エリア（カード風） -->
-  <div id="theme-message" class="theme-card"></div>
+<!-- 下部：テーマ別メッセージ（ここに表示！） -->
+<div id="theme-message" class="theme-card"></div>
 
   <!-- ↓AdSense用スペース（後で追加予定）-->
   <div class="ads"></div>
