@@ -91,4 +91,3 @@ function showTheme(theme) {
   const index = Math.floor(Math.random() * options.length);
   document.getElementById('message').innerText = options[index];
 }
-
