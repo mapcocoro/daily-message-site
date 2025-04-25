@@ -1,13 +1,13 @@
 let messages = [];
 
-// ✅ アファメーション表示用関数（上部のカードに表示）
+// ✅ アファメーション表示用関数（上部カードに表示）
 function showRandomMessage() {
   if (messages.length === 0) return;
   const index = Math.floor(Math.random() * messages.length);
   document.getElementById('message').innerText = messages[index];
 }
 
-// ✅ テーマ別切り替え関数（下部に表示）
+// ✅ テーマメッセージ表示用関数（下部エリアに表示）
 function showTheme(theme) {
   const options = themeMessages[theme];
   if (!options) return;
@@ -15,15 +15,20 @@ function showTheme(theme) {
   const index = Math.floor(Math.random() * options.length);
   const themeBox = document.getElementById('theme-message');
 
+  // 表示内容更新
   themeBox.classList.remove('visible');
-  themeBox.innerHTML = `<strong>${getThemeLabel(theme)}メッセージ：</strong><br>「${options[index]}」`;
+  themeBox.innerHTML = `
+    <strong>${getThemeLabel(theme)} メッセージ：</strong><br>
+    「${options[index]}」
+  `;
 
+  // アニメーション表示
   setTimeout(() => {
     themeBox.classList.add('visible');
   }, 50);
 }
 
-// ✅ テーマラベル取得関数（絵文字付きのラベル）
+// ✅ ラベル表記（テーマごとの絵文字付き）
 function getThemeLabel(theme) {
   switch (theme) {
     case 'relax': return '🧘‍♀️ リラックス';
@@ -33,19 +38,19 @@ function getThemeLabel(theme) {
   }
 }
 
-// ✅ JSON 読み込み（最初に呼ばれる）
+// ✅ JSONからアファメーションメッセージ読み込み
 fetch('messages.json')
   .then(response => response.json())
   .then(data => {
     messages = data;
-    showRandomMessage(); // ✅ 初回に1件表示
+    showRandomMessage(); // 初期表示
   })
   .catch(error => {
     console.error("読み込み失敗:", error);
     document.getElementById('message').innerText = "メッセージを取得できませんでした。";
   });
 
-// ✅ テーマ別メッセージ（固定で定義）
+// ✅ テーマ別メッセージ（固定で定義OK）
 const themeMessages = {
   relax: [
     "🧘‍♀️ ゆったり深呼吸して、心と体をひと休みさせましょう。",
@@ -99,4 +104,5 @@ const themeMessages = {
     "🏡 あなたにとっての“心の居場所”は、いつも内側にあります。"
   ]
 };
+
 
