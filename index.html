@@ -6,36 +6,55 @@
   <title>今日のアファメーション</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    body {
-      font-family: 'Noto Sans JP', sans-serif;
-      background: linear-gradient(to right, #fef6f9, #f3f1fc);
-      color: #333;
-      text-align: center;
-      padding: 50px 20px;
-    }
-    h1 {
-      font-size: 1.4rem;
-      font-weight: 700;
-      text-align: center;
-      margin: 1.5em 0 1em;
-      line-height: 1.4;
-      word-break: keep-all;
-      letter-spacing: 0.05em;
-    }
-    #message {
-      font-size: 1.5em;
-      margin-top: 20px;
-      background: #fff0f5;
-      border-radius: 15px;
-      padding: 20px;
-      box-shadow: 0 0 10px #eee;
-      display: inline-block;
-      max-width: 600px;
-    }
-    .ads {
-      margin-top: 40px;
-    }
-   .button {
+    /* フォント・ベース設定 */
+body {
+  font-family: "Noto Sans JP", sans-serif;
+  background: linear-gradient(to bottom, #ffeaf4, #f5f5ff);
+  color: #333;
+  margin: 0;
+  padding: 1em;
+}
+
+/* 見出し */
+h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 1.5em 0 1em;
+  line-height: 1.5;
+  word-break: keep-all;
+  letter-spacing: 0.05em;
+}
+
+/* メインメッセージカード */
+.message-card {
+  background-color: #ffeef5;
+  border-radius: 16px;
+  padding: 1.5em;
+  margin: 1.5em auto;
+  max-width: 90%;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  text-align: center;
+}
+
+/* 癒しなどのサブメッセージカード */
+.healing-message {
+  background-color: #e0f7ff;
+  border-radius: 12px;
+  padding: 1.2em;
+  margin: 2em auto;
+  max-width: 90%;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #333;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  text-align: center;
+}
+
+/* ボタン（共通） */
+.button {
   display: inline-block;
   padding: 0.8em 1.6em;
   margin: 0.5em;
@@ -47,12 +66,15 @@
   color: white;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   transition: all 0.2s ease;
+  cursor: pointer;
 }
 
 .button:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 18px rgba(0,0,0,0.15);
 }
+
+/* ボタングループ整列 */
 .button-group {
   display: flex;
   flex-wrap: wrap;
@@ -60,60 +82,20 @@
   gap: 0.6em;
   margin-top: 1em;
 }
-    .theme-card {
-      opacity: 0;
-      transition: opacity 0.8s ease;
-      margin-top: 30px;
-      padding: 20px;
-      background-color: #fff0f8;
-      border-radius: 15px;
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
-      display: inline-block;
-      max-width: 600px;
-      text-align: center;
-      font-size: 1.2em;
-      color: #444;
-    }
-    .theme-card.visible {
-      opacity: 1;
-    }
-    .message-card {
-  background-color: #ffeef5;
-  border-radius: 12px;
-  padding: 1.5em;
-  margin: 1.5em auto;
-  max-width: 90%;
-  font-size: 1.1rem;
-  line-height: 1.7;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+
+/* レスポンシブ対応（小さい画面） */
+@media screen and (max-width: 400px) {
+  .message-card,
+  .healing-message {
+    font-size: 1rem;
+    padding: 1em;
+  }
+
+  .button {
+    font-size: 0.95rem;
+    padding: 0.7em 1.2em;
+  }
 }
-.theme-card {
-  opacity: 0;
-  transition: opacity 0.8s ease;
-  margin-top: 30px;
-  padding: 20px;
-  background-color: #f0f8ff;
-  border-radius: 15px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
-  display: inline-block;
-  max-width: 600px;
-  text-align: center;
-  font-size: 1.2em;
-  color: #444;
-}
-.theme-card.visible {
-  opacity: 1;
-}
-.healing-message {
-  background-color: #e0f7ff;
-  border-radius: 10px;
-  padding: 1em;
-  margin: 2em auto;
-  max-width: 90%;
-  font-size: 1rem;
-  color: #333;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}    
   </style>
   <!-- headタグ内に追加 -->
 <link rel="manifest" href="./manifest.json">
@@ -132,20 +114,25 @@
 
 </head>
 <body>
-  <h1>🌸 今日のアファメーション 🌸</h1>
+ <h1>🌸 今日のアファメーション 🌸</h1>
 
-  <!-- アファメーション表示 -->
- <!-- 上部：アファメーション -->
-<div id="message" class="message-card">メッセージを読み込み中...</div>
+<div class="message-card">
+  🌿私はゆっくり深呼吸し、心の奥から安心と落ち着きを感じています。
+</div>
 
-<!-- 次のメッセージボタン -->
-<button onclick="showRandomMessage()">🔁 次のメッセージを見る</button>
+<div style="text-align: center;">
+  <button class="button">🔁 次のメッセージを見る</button>
+</div>
 
-<!-- テーマボタン -->
-<div style="margin-top: 40px;">
-  <button onclick="showTheme('relax')">🧘‍♀️ リラックス</button>
-  <button onclick="showTheme('positive')">🌈 前向き</button>
-  <button onclick="showTheme('healing')">🍀 癒し</button>
+<div class="button-group">
+  <button class="button">🧘‍♀️ リラックス</button>
+  <button class="button">🌈 前向き</button>
+  <button class="button">🍀 癒し</button>
+</div>
+
+<div class="healing-message">
+  🧘‍♀️ リラックス メッセージ：<br>
+  🛏 眠る前に、自分に「今日もありがとう」と伝えましょう。
 </div>
 
 <!-- 下部：テーマ別メッセージ（ここに表示！） -->
