@@ -1,28 +1,34 @@
-const CACHE_NAME = 'affirmation-pwa-v1';
+const CACHE_NAME = 'daily-message-v1';
 const urlsToCache = [
   './',
   './index.html',
-  './manifest.json',
   './style.css',
-  './script.js',
+  './message.js',
+  './messages.json',
   './icon-192.png',
   './icon-512.png'
 ];
 
-// インストール
+// インストール時：キャッシュにファイルを追加
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => {
-      return cache.addAll(urlsToCache);
-    })
+    caches.open(CACHE_NAME)
+      .then(cache => {
+        return cache.addAll(urlsToCache);
+      })
+      .catch(error => {
+        console.error('キャッシュ失敗:', error);
+      })
   );
 });
 
-// リクエスト取得
+// リクエスト時：キャッシュを優先し、なければネットワークから取得
 self.addEventListener('fetch', event => {
   event.respondWith(
-    caches.match(event.request).then(response => {
-      return response || fetch(event.request);
-    })
+    caches.match(event.request)
+      .then(response => {
+        return response || fetch(event.request);
+      })
   );
 });
+
