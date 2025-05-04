@@ -3,8 +3,15 @@ let messages = [];
 // ✅ アファメーション表示用関数（上部カードに表示）
 function showRandomMessage() {
   if (messages.length === 0) return;
+
   const index = Math.floor(Math.random() * messages.length);
-  document.getElementById('message').innerText = messages[index];
+  const messageBox = document.getElementById('message');
+
+  if (messageBox) {
+    messageBox.innerText = messages[index];
+  } else {
+    console.warn('⚠️ #message 要素が見つかりませんでした');
+  }
 }
 
 // ✅ テーマメッセージ表示用関数（下部エリアに表示）
@@ -15,12 +22,17 @@ function showTheme(theme) {
   const index = Math.floor(Math.random() * options.length);
   const themeBox = document.getElementById('theme-message');
 
+  if (!themeBox) {
+    console.warn('⚠️ #theme-message 要素が見つかりませんでした');
+    return;
+  }
+
   // 表示内容更新
   themeBox.classList.remove('visible');
-themeBox.innerHTML = `
-  <strong>${getThemeLabel(theme)} メッセージ：</strong><br>
-  ${options[index]}
-`;
+  themeBox.innerHTML = `
+    <strong>${getThemeLabel(theme)} メッセージ：</strong><br>
+    ${options[index]}
+  `;
 
   // アニメーション表示
   setTimeout(() => {
@@ -47,8 +59,12 @@ fetch('messages.json')
   })
   .catch(error => {
     console.error("読み込み失敗:", error);
-    document.getElementById('message').innerText = "メッセージを取得できませんでした。";
+    const messageBox = document.getElementById('message');
+    if (messageBox) {
+      messageBox.innerText = "メッセージを取得できませんでした。";
+    }
   });
+
 
 // ✅ テーマ別メッセージ（固定で定義OK）
 const themeMessages = {
