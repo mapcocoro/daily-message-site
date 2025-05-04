@@ -90,6 +90,21 @@
   opacity: 1;
 }
   </style>
+  <!-- headタグ内に追加 -->
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#ffddee">
+
+<!-- Service Worker 登録スクリプト（bodyの最後） -->
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./service-worker.js')
+        .then(reg => console.log('SW登録成功:', reg))
+        .catch(err => console.log('SW登録失敗:', err));
+    });
+  }
+</script>
+
 </head>
 <body>
   <h1>🌸 今日のアファメーション 🌸</h1>
