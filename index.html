@@ -4,9 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>今日のアファメーション</title>
-
-  <!-- CSS -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#ffddee" />
   <link rel="stylesheet" href="style.css" />
+
   <style>
     body {
       font-family: "Noto Sans JP", sans-serif;
@@ -17,10 +18,10 @@
     }
 
     h1 {
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       font-weight: 700;
       text-align: center;
-      margin: 1.5em 0 1em;
+      margin: 1.2em 0 1em;
       line-height: 1.5;
       word-break: keep-all;
       letter-spacing: 0.05em;
@@ -30,11 +31,11 @@
       background-color: #ffeef5;
       border-radius: 16px;
       padding: 1.5em;
-      margin: 1.5em auto;
+      margin: 1.2em auto;
       max-width: 90%;
       font-size: 1.15rem;
       line-height: 1.7;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
       text-align: center;
     }
 
@@ -47,36 +48,38 @@
       font-size: 1rem;
       line-height: 1.6;
       color: #333;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
       text-align: center;
     }
 
     .button {
       display: inline-block;
       padding: 0.8em 1.6em;
-      margin: 0.5em;
-      font-size: 1rem;
+      margin: 0.4em;
+      font-size: 0.95rem;
       font-weight: 500;
       border: none;
       border-radius: 999px;
       background: linear-gradient(to bottom, #fbd3e9, #bb99dd);
       color: white;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       transition: all 0.2s ease;
       cursor: pointer;
+      white-space: nowrap;
     }
 
     .button:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.15);
     }
 
     .button-group {
       display: flex;
-      flex-wrap: wrap;
       justify-content: center;
-      gap: 0.6em;
-      margin-top: 1em;
+      flex-wrap: nowrap;
+      gap: 0.5em;
+      overflow-x: auto;
+      padding: 0.5em;
     }
 
     @media screen and (max-width: 400px) {
@@ -87,15 +90,12 @@
       }
 
       .button {
-        font-size: 0.95rem;
-        padding: 0.7em 1.2em;
+        font-size: 0.85rem;
+        padding: 0.6em 1em;
       }
     }
   </style>
 
-  <!-- PWA設定 -->
-  <link rel="manifest" href="./manifest.json" />
-  <meta name="theme-color" content="#ffddee" />
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
@@ -106,41 +106,28 @@
     }
   </script>
 </head>
-
 <body>
   <h1>🌸 今日のアファメーション 🌸</h1>
 
-  <!-- 上部：メインメッセージ -->
-  <div id="message" class="message-card">
+  <div class="message-card" id="message">
     🌿私はゆっくり深呼吸し、心の奥から安心と落ち着きを感じています。
   </div>
 
-  <!-- メッセージ切り替え -->
   <div style="text-align: center;">
     <button class="button" onclick="showRandomMessage()">🔁 次のメッセージを見る</button>
   </div>
 
-  <!-- テーマ選択 -->
   <div class="button-group">
     <button class="button" onclick="showTheme('relax')">🧘‍♀️ リラックス</button>
     <button class="button" onclick="showTheme('positive')">🌈 前向き</button>
     <button class="button" onclick="showTheme('healing')">🍀 癒し</button>
   </div>
 
-  <!-- テーマ別メッセージ表示エリア -->
-  <div id="theme-message" class="healing-message">
-    🧘‍♀️ リラックス メッセージ：<br />
-    🛏 眠る前に、自分に「今日もありがとう」と伝えましょう。
-  </div>
+  <div class="healing-message" id="theme-message"></div>
 
-  <!-- 広告スペース（AdSenseなど） -->
-  <div class="ads">
-    <!-- 後で広告スクリプトをここに挿入します -->
-  </div>
-
-  <!-- JS -->
   <script src="message.js"></script>
 </body>
 </html>
+
 
 
