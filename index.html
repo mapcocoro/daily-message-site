@@ -1,152 +1,146 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>今日のアファメーション</title>
-  <link rel="stylesheet" href="style.css">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css" />
   <style>
-    /* フォント・ベース設定 */
-body {
-  font-family: "Noto Sans JP", sans-serif;
-  background: linear-gradient(to bottom, #ffeaf4, #f5f5ff);
-  color: #333;
-  margin: 0;
-  padding: 1em;
-}
+    body {
+      font-family: "Noto Sans JP", sans-serif;
+      background: linear-gradient(to bottom, #ffeaf4, #f5f5ff);
+      color: #333;
+      margin: 0;
+      padding: 1em;
+    }
 
-/* 見出し */
-h1 {
-  font-size: 1.4rem;
-  font-weight: 700;
-  text-align: center;
-  margin: 1.5em 0 1em;
-  line-height: 1.5;
-  word-break: keep-all;
-  letter-spacing: 0.05em;
-}
+    h1 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      text-align: center;
+      margin: 1.5em 0 1em;
+      line-height: 1.5;
+      word-break: keep-all;
+      letter-spacing: 0.05em;
+    }
 
-/* メインメッセージカード */
-.message-card {
-  background-color: #ffeef5;
-  border-radius: 16px;
-  padding: 1.5em;
-  margin: 1.5em auto;
-  max-width: 90%;
-  font-size: 1.15rem;
-  line-height: 1.7;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  text-align: center;
-}
+    .message-card {
+      background-color: #ffeef5;
+      border-radius: 16px;
+      padding: 1.5em;
+      margin: 1.5em auto;
+      max-width: 90%;
+      font-size: 1.15rem;
+      line-height: 1.7;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      text-align: center;
+    }
 
-/* 癒しなどのサブメッセージカード */
-.healing-message {
-  background-color: #e0f7ff;
-  border-radius: 12px;
-  padding: 1.2em;
-  margin: 2em auto;
-  max-width: 90%;
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #333;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  text-align: center;
-}
+    .healing-message {
+      background-color: #e0f7ff;
+      border-radius: 12px;
+      padding: 1.2em;
+      margin: 2em auto;
+      max-width: 90%;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #333;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      text-align: center;
+    }
 
-/* ボタン（共通） */
-.button {
-  display: inline-block;
-  padding: 0.8em 1.6em;
-  margin: 0.5em;
-  font-size: 1rem;
-  font-weight: 500;
-  border: none;
-  border-radius: 999px;
-  background: linear-gradient(to bottom, #fbd3e9, #bb99dd);
-  color: white;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transition: all 0.2s ease;
-  cursor: pointer;
-}
+    .button {
+      display: inline-block;
+      padding: 0.8em 1.6em;
+      margin: 0.5em;
+      font-size: 1rem;
+      font-weight: 500;
+      border: none;
+      border-radius: 999px;
+      background: linear-gradient(to bottom, #fbd3e9, #bb99dd);
+      color: white;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
 
-.button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-}
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    }
 
-/* ボタングループ整列 */
-.button-group {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.6em;
-  margin-top: 1em;
-}
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.6em;
+      margin-top: 1em;
+    }
 
-/* レスポンシブ対応（小さい画面） */
-@media screen and (max-width: 400px) {
-  .message-card,
-  .healing-message {
-    font-size: 1rem;
-    padding: 1em;
-  }
+    @media screen and (max-width: 400px) {
+      .message-card,
+      .healing-message {
+        font-size: 1rem;
+        padding: 1em;
+      }
 
-  .button {
-    font-size: 0.95rem;
-    padding: 0.7em 1.2em;
-  }
-}
+      .button {
+        font-size: 0.95rem;
+        padding: 0.7em 1.2em;
+      }
+    }
   </style>
-  <!-- headタグ内に追加 -->
-<link rel="manifest" href="./manifest.json">
-<meta name="theme-color" content="#ffddee">
 
-<!-- Service Worker 登録スクリプト（bodyの最後） -->
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./service-worker.js')
-        .then(reg => console.log('SW登録成功:', reg))
-        .catch(err => console.log('SW登録失敗:', err));
-    });
-  }
-</script>
-
+  <!-- PWA設定 -->
+  <link rel="manifest" href="./manifest.json" />
+  <meta name="theme-color" content="#ffddee" />
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./service-worker.js')
+          .then(reg => console.log('SW登録成功:', reg))
+          .catch(err => console.log('SW登録失敗:', err));
+      });
+    }
+  </script>
 </head>
+
 <body>
- <h1>🌸 今日のアファメーション 🌸</h1>
+  <h1>🌸 今日のアファメーション 🌸</h1>
 
-<div class="message-card">
-  🌿私はゆっくり深呼吸し、心の奥から安心と落ち着きを感じています。
-</div>
+  <!-- 上部：メインメッセージ -->
+  <div id="message" class="message-card">
+    🌿私はゆっくり深呼吸し、心の奥から安心と落ち着きを感じています。
+  </div>
 
-<div style="text-align: center;">
-  <button class="button">🔁 次のメッセージを見る</button>
-</div>
+  <!-- メッセージ切り替え -->
+  <div style="text-align: center;">
+    <button class="button" onclick="showRandomMessage()">🔁 次のメッセージを見る</button>
+  </div>
 
-<div class="button-group">
-  <button class="button">🧘‍♀️ リラックス</button>
-  <button class="button">🌈 前向き</button>
-  <button class="button">🍀 癒し</button>
-</div>
+  <!-- テーマ選択 -->
+  <div class="button-group">
+    <button class="button" onclick="showTheme('relax')">🧘‍♀️ リラックス</button>
+    <button class="button" onclick="showTheme('positive')">🌈 前向き</button>
+    <button class="button" onclick="showTheme('healing')">🍀 癒し</button>
+  </div>
 
-<div class="healing-message">
-  🧘‍♀️ リラックス メッセージ：<br>
-  🛏 眠る前に、自分に「今日もありがとう」と伝えましょう。
-</div>
+  <!-- テーマ別メッセージ表示エリア -->
+  <div id="theme-message" class="healing-message">
+    🧘‍♀️ リラックス メッセージ：<br />
+    🛏 眠る前に、自分に「今日もありがとう」と伝えましょう。
+  </div>
 
-  <div id="message-box" class="message-card">
-  🌿私はゆっくり深呼吸し、心の奥から安心と落ち着きを感じています。
-</div>
+  <!-- 広告スペース（AdSenseなど） -->
+  <div class="ads">
+    <!-- 後で広告スクリプトをここに挿入します -->
+  </div>
 
-<!-- 下部：テーマ別メッセージ（ここに表示！） -->
-<div id="theme-message" class="theme-card"></div>
-
-  <!-- ↓AdSense用スペース（後で追加予定）-->
-  <div class="ads"></div>
-
-  <!-- ✅ scriptはbodyの最後に！ deferは不要 -->
- <script src="message.js"></script>
+  <!-- JS -->
+  <script src="message.js"></script>
 </body>
 </html>
+
 
